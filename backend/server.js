@@ -4,7 +4,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import buildingsRouter from "./routes/buildings.js";
 
-// Explicitly specify the path to the .env file
 dotenv.config({ path: "./backend/.env" });
 
 const app = express();
@@ -16,10 +15,10 @@ app.use(express.json());
 
 // MongoDB Connection
 const uri = process.env.MONGO_URI;
-console.log("MongoDB URI:", uri); // Check the value
+console.log("MongoDB URI:", uri);
 
 mongoose
-  .connect(uri) // Removed useNewUrlParser and useUnifiedTopology
+  .connect(uri)
   .then(() => {
     console.log("MongoDB database connection established successfully");
   })
@@ -28,7 +27,7 @@ mongoose
   });
 
 // Define Routes
-app.use("/buildings", buildingsRouter);
+app.use("/api/buildings", buildingsRouter); // Ensure this matches your frontend request
 
 // Root Route
 app.get("/", (req, res) => {

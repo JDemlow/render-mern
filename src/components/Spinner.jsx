@@ -1,16 +1,19 @@
 import React from "react";
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override = {
+  display: "block",
+  margin: "100px auto",
+};
 
 const Spinner = ({ loading }) => {
-  if (!loading) return null;
   return (
-    <div className="flex justify-center items-center">
-      <div
-        className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
-        role="status"
-      >
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    </div>
+    <ClipLoader
+      color="#10B981" // Tailwind color emerald-500
+      loading={loading}
+      cssOverride={override}
+      size={150}
+    />
   );
 };
 
