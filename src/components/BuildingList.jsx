@@ -42,10 +42,40 @@ function BuildingsList() {
               className="bg-white shadow-md rounded-lg p-6 mb-4"
             >
               <div className="font-bold text-xl mb-2">
-                {building.buildingId}
+                Building ID: {building.buildingId}
               </div>
               <p className="text-gray-700 text-base">
-                {building.streetAddress}
+                Street Address: {building.streetAddress}
+              </p>
+              <p className="text-gray-700 text-base">
+                Building Size: {building.buildingSize || "No size information"}
+              </p>
+              <p className="text-gray-700 text-base">
+                Property Use 1st: {building.propertyUse1st || "N/A"}
+              </p>
+              <p className="text-gray-700 text-base">
+                Property Use 2nd: {building.propertyUse2nd || "N/A"}
+              </p>
+              <p className="text-gray-700 text-base">
+                Property Use 3rd: {building.propertyUse3rd || "N/A"}
+              </p>
+              <p className="text-gray-700 text-base">
+                Benchmarking Status: {building.benchmarkingStatus || "N/A"}
+              </p>
+              <p className="text-gray-700 text-base">
+                Current Site EUI: {building.currentSiteEUI || "N/A"}
+              </p>
+              <p className="text-gray-700 text-base">
+                Baseline 2019 EUI: {building.baseline2019EUI || "N/A"}
+              </p>
+              <p className="text-gray-700 text-base">
+                1st Target 2025 EUI: {building.firstTarget2025EUI || "N/A"}
+              </p>
+              <p className="text-gray-700 text-base">
+                2nd Target 2027 EUI: {building.secondTarget2027EUI || "N/A"}
+              </p>
+              <p className="text-gray-700 text-base">
+                Final Target 2030 EUI: {building.finalTarget2030EUI || "N/A"}
               </p>
             </li>
           ))}
