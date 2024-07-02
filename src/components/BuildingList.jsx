@@ -2,34 +2,30 @@ import React, { useState, useEffect } from "react";
 
 function BuildingsList() {
   const [buildings, setBuildings] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [buildingsPerPage] = useState(10); // Number of buildings per page
+  const [visibleCount, setVisibleCount] = useState(9);
   const [expandedAddresses, setExpandedAddresses] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBuildings = async () => {
       try {
         const response = await fetch(
-          `${
-            import.meta.env.VITE_API_URL
-          }/buildings/?page=${currentPage}&limit=${buildingsPerPage}`
+          `${import.meta.env.VITE_API_URL}/buildings?limit=${visibleCount}`
         );
         const data = await response.json();
         setBuildings(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
 
     fetchBuildings();
-  }, [currentPage, buildingsPerPage]);
+  }, [visibleCount]);
 
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const prevPage = () => {
-    setCurrentPage(currentPage - 1);
+  const loadMoreBuildings = () => {
+    setVisibleCount((prevCount) => prevCount + 9);
   };
 
   const toggleAddress = (id) => {
@@ -42,7 +38,9 @@ function BuildingsList() {
   return (
     <div className="min-h-screen p-6 bg-gray-100">
       <h1 className="mb-6 text-3xl font-bold text-center">Buildings List</h1>
-      {Array.isArray(buildings) ? (
+      {loading ? (
+        <p>Loading...</p>
+      ) : Array.isArray(buildings) ? (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {buildings.map((building) => (
             <div
@@ -111,13 +109,13 @@ function BuildingsList() {
           ))}
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Error: Expected buildings to be an array</p>
       )}
       <div className="flex flex-col items-center justify-center pt-2">
         <div className="flex flex-col items-center justify-center space-y-2 place-items-center">
           <div>
             <button
-              onClick={nextPage}
+              onClick={loadMoreBuildings}
               className="px-6 py-3 mt-4 text-lg text-white rounded-lg bg-emerald-500 hover:bg-emerald-600"
             >
               Show More Buildings
