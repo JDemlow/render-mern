@@ -4,6 +4,7 @@
   "scripts": {
     "start": "node backend/server.js",
     "client": "vite",
+    "build": "vite build",
     "client:build": "vite build",
     "client:dev": "vite",
     "server": "nodemon backend/server.js",
