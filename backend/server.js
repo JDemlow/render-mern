@@ -4,7 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import buildingsRouter from "./routes/buildings.js";
 
-dotenv.config();
+// Explicitly specify the path to the .env file
+dotenv.config({ path: "./backend/.env" });
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,8 +16,10 @@ app.use(express.json());
 
 // MongoDB Connection
 const uri = process.env.MONGO_URI;
+console.log("MongoDB URI:", uri); // Add this line to check the value
+
 mongoose
-  .connect(uri)
+  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("MongoDB database connection established successfully");
   })
