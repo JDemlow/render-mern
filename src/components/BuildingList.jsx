@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 function BuildingsList() {
   const [buildings, setBuildings] = useState([]);
@@ -9,12 +8,13 @@ function BuildingsList() {
   useEffect(() => {
     const fetchBuildings = async () => {
       try {
-        const response = await axios.get(
+        const response = await fetch(
           `${
             import.meta.env.VITE_API_URL
           }/buildings/?page=${currentPage}&limit=${buildingsPerPage}`
         );
-        setBuildings(response.data);
+        const data = await response.json();
+        setBuildings(data);
       } catch (error) {
         console.log(error);
       }
@@ -32,14 +32,21 @@ function BuildingsList() {
   };
 
   return (
-    // add tailwind classes
     <div className="flex flex-col items-center pt-8">
       <h2 className="text-2xl font-bold mb-4">Buildings List</h2>
       {Array.isArray(buildings) ? (
-        <ul>
+        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {buildings.map((building) => (
-            <li key={building._id}>
-              {building.buildingId} - {building.streetAddress}
+            <li
+              key={building._id}
+              className="bg-white shadow-md rounded-lg p-6 mb-4"
+            >
+              <div className="font-bold text-xl mb-2">
+                {building.buildingId}
+              </div>
+              <p className="text-gray-700 text-base">
+                {building.streetAddress}
+              </p>
             </li>
           ))}
         </ul>
