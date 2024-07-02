@@ -32,8 +32,9 @@ function BuildingsList() {
   };
 
   return (
-    <div>
-      <h2>Buildings List</h2>
+    // add tailwind classes
+    <div className="flex flex-col items-center pt-8">
+      <h2 className="text-2xl font-bold mb-4">Buildings List</h2>
       {Array.isArray(buildings) ? (
         <ul>
           {buildings.map((building) => (
@@ -46,10 +47,16 @@ function BuildingsList() {
         <p>Loading...</p>
       )}
       <div>
-        <button onClick={prevPage} disabled={currentPage === 1}>
+        <button
+          className="mr-2 border-2 p-2"
+          onClick={prevPage}
+          disabled={currentPage === 1}
+        >
           Previous Page
         </button>
-        <button onClick={nextPage}>Next Page</button>
+        <button className="border-2 p-2" onClick={nextPage}>
+          Next Page
+        </button>
       </div>
     </div>
   );

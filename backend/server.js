@@ -19,7 +19,7 @@ const uri = process.env.MONGO_URI;
 console.log("MongoDB URI:", uri); // Add this line to check the value
 
 mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(uri)
   .then(() => {
     console.log("MongoDB database connection established successfully");
   })
@@ -46,5 +46,4 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-// Export the app as a Vercel serverless function
 export default app;

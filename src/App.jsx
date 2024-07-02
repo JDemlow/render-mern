@@ -1,5 +1,4 @@
 import BuildingsList from "./components/BuildingList";
-import "./App.css";
 
 function App() {
   return (
