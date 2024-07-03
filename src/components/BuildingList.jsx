@@ -169,7 +169,7 @@ const BuildingList = ({ isHome = false }) => {
       </div>
       <div className="flex flex-col items-center justify-center pt-2">
         <div className="flex flex-col items-center justify-center space-y-2 place-items-center">
-          {!isHome && buildings.length < totalCount && (
+          {!isHome && hasMore && (
             <div>
               <button
                 onClick={loadMoreBuildings}
