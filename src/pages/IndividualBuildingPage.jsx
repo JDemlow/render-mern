@@ -1,3 +1,8 @@
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import Spinner from "../components/Spinner";
+
 const IndividualBuildingPage = () => {
   const { id } = useParams();
   const [building, setBuilding] = useState(null);
