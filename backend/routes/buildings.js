@@ -1,4 +1,3 @@
-// routes/buildings.js
 import express from "express";
 import Building from "../models/building.js";
 
@@ -26,11 +25,13 @@ router.get("/:id", async (req, res) => {
     console.log(`Fetching building with ID: ${req.params.id}`);
     const building = await Building.findById(req.params.id);
     if (building == null) {
+      console.log(`Building with ID: ${req.params.id} not found`);
       return res.status(404).json({ message: "Cannot find building" });
     }
+    console.log(`Building found: ${building}`);
     res.json(building);
   } catch (err) {
-    console.error(err);
+    console.error(`Error fetching building with ID: ${req.params.id}`, err);
     return res.status(500).json({ message: err.message });
   }
 });
