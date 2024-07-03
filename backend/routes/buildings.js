@@ -20,4 +20,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET a specific building by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const building = await Building.findById(req.params.id);
+    if (building == null) {
+      return res.status(404).json({ message: "Cannot find building" });
+    }
+    res.json(building);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 export default router;
