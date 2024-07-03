@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Spinner from "./Spinner";
 
 function BuildingsList() {
   const [buildings, setBuildings] = useState([]);
@@ -34,6 +35,10 @@ function BuildingsList() {
       [id]: !prevState[id],
     }));
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="min-h-screen p-6 bg-gray-100">
