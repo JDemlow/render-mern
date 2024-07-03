@@ -9,12 +9,14 @@ router.get("/", async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
 
   try {
+    console.log("Fetching all buildings with pagination:");
     const buildings = await Building.find()
       .skip((page - 1) * limit)
       .limit(limit);
-
+    console.log("Buildings fetched successfully:", buildings);
     res.json(buildings);
   } catch (err) {
+    console.error("Error fetching buildings:", err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -24,15 +26,13 @@ router.get("/:id", async (req, res) => {
   try {
     console.log(`Fetching building with ID: ${req.params.id}`);
     const building = await Building.findById(req.params.id);
-    if (building == null) {
-      console.log(`Building with ID: ${req.params.id} not found`);
-      return res.status(404).json({ message: "Cannot find building" });
+    if (!building) {
+      return res.status(404).json({ message: "Building not found" });
     }
-    console.log(`Building found: ${building}`);
     res.json(building);
   } catch (err) {
-    console.error(`Error fetching building with ID: ${req.params.id}`, err);
-    return res.status(500).json({ message: err.message });
+    console.error("Error fetching building:", err);
+    res.status(500).json({ message: err.message });
   }
 });
 
