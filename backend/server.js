@@ -16,7 +16,7 @@ app.use(express.json());
 
 // MongoDB Connection
 const uri = process.env.MONGO_URI;
-console.log("MongoDB URI:", uri); // Add this line to check the value
+console.log("MongoDB URI:", uri);
 
 mongoose
   .connect(uri)
