@@ -80,9 +80,9 @@ const BuildingList = ({ isHome = false }) => {
         {isHome ? "Recent Buildings" : "Buildings List"}
       </h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {buildingsToShow.map((building) => (
+        {buildingsToShow.map((building, index) => (
           <div
-            key={building._id}
+            key={`${building._id}-${index}`}
             className="relative bg-white shadow-md rounded-xl"
           >
             <div className="p-4">
