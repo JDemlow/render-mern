@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -20,7 +21,7 @@ const Navbar = () => {
         <NavLink to="/">
           <img
             className="h-8 md:w-16 md:h-16 sm:w-auto sm:h-10"
-            src="../src/assets/logo.png"
+            src={logo}
             alt="Your Company"
           />
         </NavLink>
